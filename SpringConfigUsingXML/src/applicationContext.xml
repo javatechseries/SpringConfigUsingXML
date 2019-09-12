@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Load Properties file sport.poperties -->
+	<context:property-placeholder location="classpath:sport.properties"/>
+    <!-- Define your beans here -->
+         
+ 	<bean id="baseballCoach"
+ 		class="com.explore.spring.BaseballCoach">	
+ 		<constructor-arg ref="fortuneService"></constructor-arg> 	 		
+ 	</bean>
+ 	
+ 	<bean id="fortuneService"
+ 		class="com.explore.spring.HappyFortuneService">	
+ 	</bean>
+ 	
+ 	<bean id="randomFortuneService" class="com.explore.spring.RandomFortuneService">
+ 	</bean>
+ 	
+ 	<bean id="cricketCoach"
+ 		class="com.explore.spring.CricketCoach">
+ 		<property name="fortuneService" ref="randomFortuneService"></property>
+ 		
+ 		<!-- This is how you set the literal values to a property -->
+ 		<!-- <property name="emailAddress" value="theBestCoach@gmail.com"></property>
+ 		<property name="team" value="StarWars"></property> -->
+ 		
+ 		<!-- This is how you load the values from a property file -->
+ 		<property name="emailAddress" value="${email}"></property>
+ 		<property name="team" value="${team}"></property>
+ 			 		
+ 	</bean>
+
+    <bean id="trackCoach"
+        class="com.explore.spring.TrackCoach"> 
+        <constructor-arg ref="fortuneService"></constructor-arg>        
+    </bean>
+     
+     <bean id="myLoggerConfig" class="com.explore.spring.logging.MyLoggerConfig" init-method="initLogger">
+    	<property name="rootLoggerLevel" value="FINE" />
+    	<property name="printedLoggerLevel" value="FINE"/>
+    </bean>
+
+</beans>
+
+
+
+
+
