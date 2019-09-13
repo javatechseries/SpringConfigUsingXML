@@ -1,7 +1,5 @@
 package com.explore.spring;
 
-import com.explore.spring.FortuneService;
-
 public class TrackCoach implements Coach {
 	
 	private FortuneService fortuneService;
